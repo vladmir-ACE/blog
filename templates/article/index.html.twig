@@ -1,20 +1,59 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1 class="text text-primary text-center bg-dark">LISTE DES ARTICLES</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/AGODA Marina/Documents/ProjetBlog/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/AGODA Marina/Documents/ProjetBlog/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
-</div>
+<a href="{{ url('app_article_save') }}" class="btn btn-info" style="margin-left:80%;">Ajouter</a>
+
+ <div class="d-flex jusitfy-content-center align-item-center">
+     <div style="width:70%;margin-left:15%">
+        <table id="example" class="table table-striped ">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">image</th>
+                <th scope="col">titre</th>
+                <th scope="col">auteur</th>
+                <th scope="col">contenu</th>
+                <th scope="col">date de creation</th>
+                <th scope="col">date de Modification</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% set i=0 %}
+                {% for Data in data %}
+                {% set i=i+1 %}
+              <tr>
+                <th scope="row">{{i}}</th>
+                <td>
+                    <img src="{{vich_uploader_asset(Data,'imageFile')}}" alt="img" style="border-radius: 50%; width:50px ;height:50px;">
+                </td>
+                <td>{{Data.title}}</td>
+                <td>{{Data.auteur}}</td>
+                <td>{{Data.contenu}}</td>
+                <td>{{Data.dateCreation|date('d/m/y')}}</td>
+                <td>{{Data.dateMiseaJour|date('d/m/y')}}</td>
+
+                <td>
+                    <span>
+                        <a href="{{ url('app_article_modif',{'id':Data.id })}}" class="btn btn-warning">Modifier</a>
+                        <a href="{{ url('app_article_delete',{'id':Data.id})}}" class="btn btn-danger">delete</a>
+                    </span>
+                </td>
+              </tr>
+              
+               {% endfor %}
+            </tbody>
+          </table>
+     </div>
+ </div>
+
+
 {% endblock %}
+
+    
+
+

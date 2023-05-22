@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+
+ <style>
+    body{
+        background-color:bisque;
+    }
+</style>
+            
+        {% endblock %}
+
+
+
+{% block body %}
+
+<h2 class="text text-center text-info" style="background-color:white">
+        ENREGISTRER UN  ARTICLE
+</h2>
+
+<div class="d-flex justify-content-center align-item-center" >
+  
+    <div style="padding:5%; margin-top:50px;" class="card">
+        {{form_start(form)}}
+
+        <div class="card-body">
+
+        {{form_row(form.title)}}
+        {{form_row(form.auteur)}}
+        {{form_row(form.contenu)}}
+        {{form_row(form.categorie)}}
+        {{form_row(form.imageFile)}}
+
+        </div>
+
+        
+        
+       {{form_errors(form)}}
+       <br>
+       <button class="btn btn-primary">SUBMIT</button>
+        {{form_end(form)}}
+    </div>
+    
+</div>
+
+
+
+    
+
+{% endblock %}

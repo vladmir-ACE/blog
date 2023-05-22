@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+<h2 class="text text-center text-info">
+        ENREGISTRER UNE CATEGORIE 
+</h2>
+
+<div class="d-flex justify-content-center align-item-center" style="background-color:bisque; height:500px;">
+  
+    <div style="width:30%; height: 40%; padding:5%; margin-top:50px;" class="card">
+        {{form_start(form)}}
+        {{form_row(form.intitule)}}
+       {{form_errors(form)}}
+       <br>
+       <button class="btn  btn-block btn-primary">SUBMIT</button>
+        {{form_end(form)}}
+    </div>
+    
+</div>
+
+
+
+    
+
+{% endblock %}

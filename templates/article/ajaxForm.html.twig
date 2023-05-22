@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<form action="{{path('app_article_ajax_save')}}" method="POST">
+
+    <label for="article_title">Titre :</label>
+    <input type="text" id="article_title" name="title">
+     <br>
+    <label for="article_contenu"> Contenu: </label>
+    <input type="text" id="article_contenu"name="contenu" >
+
+    <input type="submit" id="submit_article">
+
+
+</form>
+
+<div id="response_message">
+
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+ {{parent()}}
+<script src="{{asset('assets/jquery-3.7.0.min.js')}}"></script>
+ <script src="{{asset('assets/app.js')}}"></script>
+{% endblock %}
