@@ -7,10 +7,13 @@ use App\Entity\ArticleAjax;
 use App\Form\ArticleType;
 use App\Repository\ArticleAjaxRepository;
 use App\Repository\ArticleRepository;
+use Psr\Log\LoggerInterface;
+use SebastianBergmann\CodeCoverage\Report\Html\Renderer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -79,7 +82,7 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute("app_article_index");
     }
 
-    #[Route('/article/save', name: 'app_article_ajax_form',methods:['GET'])]
+    #[Route('/article/saveForm', name: 'app_article_ajax_form',methods:['GET'])]
     public function ajouterar()
     {
         return $this->render("article/ajaxForm.html.twig");
@@ -105,6 +108,67 @@ class ArticleController extends AbstractController
      return new JsonResponse(['message'=>' l\'article a été bien enregistrer ']);
     }
 
+   #[Route('/test',name:'app_test')]
+    public function exo(Request $request){
+
+        //$nom=$request->get('nom');
+        $nom=$request->query->get('nom');
+        dd($nom);
+        return $this->render("article/test.html.twig");
+    }
+
+    #[Route('/session/add',name:'app_add_session')]
+    public function add_session(Request $request, SessionInterface $sessionInterface){
+
+       $session= $sessionInterface->set('name','Teddy');
+
+
+        // //$nom=$request->get('nom');
+        // $nom=$request->query->get('nom');
+        // dd($nom);
+        //return  new Response();
+       return $this->render("article/add_session.html.twig",['session'=>$session]);
+    }
+
+    #[Route('/session/get',name:'app_get_session')]
+    public function get_session(Request $request, SessionInterface $sessionInterface){
+
+        if ($sessionInterface->has('name')) {
+             $name=$sessionInterface->get('name');
+            dd($name);
+            # code...
+        }
+
+
+
+        // //$nom=$request->get('nom');
+        // $nom=$request->query->get('nom');
+        // dd($nom);
+        return $this->render("article/get_session.html.twig");
+    }
+
+    #[Route('/logger',name:'app_logger_session')]
+    public function logger(LoggerInterface $log, ArticleAjaxRepository $articleAjaxRepository, Request $request){
+
+        $article=new ArticleAjax();
+
+        $titre=$request->get('title');
+        $contenue=$request->get('contenu');
+
+        $ajaxArticle= new ArticleAjax();
+
+        $ajaxArticle->setTitle($titre);
+        $ajaxArticle->setContenu($contenue);
+
+       $articleAjaxRepository->save($article,flush:true);
+
+       
+       $log->debug($article->getId()." l'article a été enregistrer");
+
+      
+
+        return $this->render("article/get_session.html.twig");
+    }
 
 
 }

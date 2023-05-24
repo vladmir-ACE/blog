@@ -48,7 +48,7 @@ class Article
 
 
     public function __construct()
-    {
+    { 
         $this->dateCreation= new \DateTime();
         $this->dateMiseaJour=new \DateTime();
     }
