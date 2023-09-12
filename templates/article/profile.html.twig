@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}  
+    
+<style>
+
+    body{
+
+
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1014%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M 0%2c231 C 72%2c203.2 216%2c92.8 360%2c92 C 504%2c91.2 576%2c240 720%2c227 C 864%2c214 936%2c22.8 1080%2c27 C 1224%2c31.2 1368%2c203.8 1440%2c248L1440 560L0 560z' fill='%23184a7e'%3e%3c/path%3e%3cpath d='M 0%2c540 C 96%2c498 288%2c337 480%2c330 C 672%2c323 768%2c515 960%2c505 C 1152%2c495 1344%2c325 1440%2c280L1440 560L0 560z' fill='%232264ab'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1014'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        /* background-image: url("{{asset('images/bg.png')}}");
+        background-repeat: no-repeat;
+        background-size: cover; */
+    }
+    
+     
+</style>
+
+{% endblock %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex jusify-content-center align-item-center">
+
+
+
+        <div style="width:20%; height:30%">
+
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_NODCLWy3iX.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
+
+        </div>
+
+
+        {% for Profile in profile %}
+
+        <div class="card" style="margin-left:30%;margin-top:3%; width:40%; height:30%; padding:3%;">
+
+            <div class="card-title">
+                 <h4 class="text text-center">Profile de l'auteur</h4>
+            </div>
+
+            <div class="card-body">
+
+                <p><strong>Nom: {{Profile.nom}}</strong></p>
+                <p><strong>Prenom: {{Profile.prenom}}</strong></p>
+                <p><strong>Email: {{Profile.email}}</strong></p>
+                <p><strong>Age: {{Profile.age}}</strong></p>
+                <p><strong>Tel: {{Profile.tel}}</strong></p>
+
+            </div>
+
+        </div>
+            
+        {% endfor %}
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+{% endblock %}

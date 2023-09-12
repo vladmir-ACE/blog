@@ -24,7 +24,7 @@ class Article
 
     
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $auteur = null;
 
     
@@ -45,6 +45,15 @@ class Article
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateMiseaJour = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $nbrlike = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $nbrdislike = null;
+
+    #[ORM\ManyToOne(inversedBy: 'article')]
+    private ?User $user = null;
 
 
     public function __construct()
@@ -166,6 +175,42 @@ class Article
     public function setDateMiseaJour(\DateTimeInterface $dateMiseaJour): self
     {
         $this->dateMiseaJour = $dateMiseaJour;
+
+        return $this;
+    }
+
+    public function getNbrlike(): ?int
+    {
+        return $this->nbrlike;
+    }
+
+    public function setNbrlike(?int $nbrlike): self
+    {
+        $this->nbrlike = $nbrlike;
+
+        return $this;
+    }
+
+    public function getNbrdislike(): ?int
+    {
+        return $this->nbrdislike;
+    }
+
+    public function setNbrdislike(?int $nbrdislike): self
+    {
+        $this->nbrdislike = $nbrdislike;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

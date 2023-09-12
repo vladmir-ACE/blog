@@ -24,7 +24,7 @@ class ArticleType extends AbstractType
             ->add('imageFile',VichFileType::class,[
                 "label"=>"Image de l'article"
             ])
-            ->add('auteur',TextType::class)
+            
             ->add('categorie',EntityType::class,
             [
                 "class"=>Categorie::class,

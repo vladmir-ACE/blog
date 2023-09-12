@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+{% include "article/blogNav.html.twig" %}
+
+<h1 style="text-decoration: underline;">Catégorie:{{data[0].categorie.intitule}}</h1>
+
+
+<div class="d-flex justify-content-center flex-column align-item-center">
+
+
+
+  {% for Data in data %}
+    <div class="card flex-row mb-3"  style="width: 50% ; margin-left:20% ;">
+        <img img "card-img-top"  src="{{vich_uploader_asset(Data,'imageFile')}}" alt="Card image cap" style="width:30%; height:200px;">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{Data.title}}</h5>
+          <span><h6 class="card-subtitle mb-2 text-muted">Auteur: {{Data.user.nom}} 
+            <a href="{{path('app-user-profile',{'id':Data.user.id})}}">
+              <img src="{{asset('images/avatar.png')}}" style="width:30px ;height:30px;"  > 
+           </a>
+          </h6>
+            
+          </span>
+
+          
+          <p class="card-text">{{Data.contenu}}</p>
+          <p class="text text-end">
+                <span>
+                  <a href="$" data-id="{{Data.id}}" class="like" >
+                    <i style="font-size:24px">&#128077;</i>
+                  </a>
+                </span>
+                <span id="{{Data.id}}Like" >
+                      {{Data.nbrlike}} 
+                </span>
+                <span>
+                  <a href="" data-id="{{Data.id}}" class="dislike">
+                    <i style="font-size:24px">&#128078;</i>
+                 </a>
+                 <span id="{{Data.id}}Dis">
+                       {{Data.nbrdislike}}
+               </span>
+                </span>
+          </p>
+        </div>
+      </div>        
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+ {{parent()}}
+<script src="{{asset('assets/jquery-3.7.0.min.js')}}"></script>
+ <script src="{{asset('assets/app.js')}}"></script>
+{% endblock %}
+
